@@ -11,6 +11,7 @@ import {
 
 import "./index.css";
 import { getFileDirectory } from "../../api/fileDirectoryApi";
+import { withSnackbar } from "notistack";
 
 const File = (props) => {
   const { name, path } = props;
@@ -24,7 +25,10 @@ const File = (props) => {
         setOpen(true);
       })
       .catch((error) => {
-        console.log(error);
+        props.enqueueSnackbar(
+          error?.message || "Failed to fetch File contents!",
+          { variant: "error" }
+        );
       });
   };
 
@@ -47,4 +51,4 @@ const File = (props) => {
   );
 };
 
-export default File;
+export default withSnackbar(File);

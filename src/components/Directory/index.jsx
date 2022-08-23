@@ -6,6 +6,7 @@ import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
 import "./index.css";
 import File from "../File";
 import { getFileDirectory } from "../../api/fileDirectoryApi";
+import { withSnackbar } from "notistack";
 
 const Directory = (props) => {
   const { name, path } = props;
@@ -19,7 +20,10 @@ const Directory = (props) => {
         setOpen(!open);
       })
       .catch((error) => {
-        console.log(error);
+        props.enqueueSnackbar(
+          error?.message || "Failed to fetch Directory details!",
+          { variant: "error" }
+        );
       });
   };
 
@@ -40,12 +44,14 @@ const Directory = (props) => {
                 <Directory
                   key={index}
                   name={dir.name}
+                  enqueueSnackbar={props.enqueueSnackbar}
                   path={path === "root" ? dir.name : path + "/" + dir.name}
                 />
               ) : (
                 <File
                   key={index}
                   name={dir.name}
+                  enqueueSnackbar={props.enqueueSnackbar}
                   path={path === "root" ? dir.name : path + "/" + dir.name}
                 />
               )
@@ -57,4 +63,4 @@ const Directory = (props) => {
   );
 };
 
-export default Directory;
+export default withSnackbar(Directory);

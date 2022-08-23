@@ -3,10 +3,11 @@ import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Container, List } from "@mui/material";
 import Directory from "./components/Directory";
+import { SnackbarProvider } from "notistack";
 
 function App() {
   return (
-    <React.Fragment>
+    <SnackbarProvider maxSnack={3}>
       <CssBaseline />
       <nav className="App-navbar">File Directory System</nav>
       <Container className="App-container">
@@ -14,7 +15,7 @@ function App() {
           <Directory name="root" path="root" />
         </List>
       </Container>
-    </React.Fragment>
+    </SnackbarProvider>
   );
 }
 
