@@ -4,5 +4,13 @@ import {
 } from "./endpoint"
 
 export const getFileDirectory = (path) => {
-  return API.get(API_END_POINTS + `?path=${path}`)
+  return new Promise((resolve, reject) => {
+    API.get(API_END_POINTS.getFilePath + `?path=${encodeURIComponent(path)}`)
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 }
