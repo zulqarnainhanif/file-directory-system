@@ -1,7 +1,9 @@
 .File-button {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   padding-left: 10px !important;
-}
-
-.File-dialog-content {
-  padding: 20px;
 }

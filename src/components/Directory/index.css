@@ -1,5 +1,17 @@
 .Directory-button {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   padding-left: 10px !important;
+}
+
+.Directory-button svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .Directory-details {

@@ -1,0 +1,29 @@
+.Dialog-model {
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: rgba(211, 211, 211, 0.7);
+}
+
+.Dialog-content {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  background: white;
+}
+
+.Dialog-title {
+  padding: 20px 20px 0;
+  font-size: 24px;
+}
+
+.Dialog-body {
+  padding: 20px;
+  font-size: 16px;
+}

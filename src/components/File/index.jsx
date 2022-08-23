@@ -1,17 +1,10 @@
 import React, { Fragment, useState } from "react";
 
-import {
-  Container,
-  Dialog,
-  DialogTitle,
-  ListItemButton,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { withSnackbar } from "notistack";
 
 import "./index.css";
 import { getFileDirectory } from "../../api/fileDirectoryApi";
-import { withSnackbar } from "notistack";
+import Dialog from "../Dialog";
 
 const File = (props) => {
   const { name, path } = props;
@@ -38,15 +31,16 @@ const File = (props) => {
 
   return (
     <Fragment>
-      <ListItemButton className="File-button" onClick={handleClick}>
-        <ListItemText primary={name} />
-      </ListItemButton>
-      <Dialog maxWidth="md" fullWidth onClose={handleClose} open={open}>
-        <DialogTitle>Content of {name}</DialogTitle>
-        <Container className="File-dialog-content">
-          <Typography>{details?.contents}</Typography>
-        </Container>
-      </Dialog>
+      <div className="File-button" onClick={handleClick}>
+        <div>{name}</div>
+      </div>
+      {open && details && (
+        <Dialog
+          handleClose={handleClose}
+          title={`Content of ${name}`}
+          contents={details?.contents}
+        />
+      )}
     </Fragment>
   );
 };

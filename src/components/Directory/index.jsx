@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
 
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
+import { withSnackbar } from "notistack";
 
 import "./index.css";
 import File from "../File";
 import { getFileDirectory } from "../../api/fileDirectoryApi";
-import { withSnackbar } from "notistack";
+import { ReactComponent as ExpandMore } from "../../assets/icons/ExpandMore.svg";
+import { ReactComponent as ExpandLess } from "../../assets/icons/ExpandLess.svg";
 
 const Directory = (props) => {
   const { name, path } = props;
@@ -31,33 +31,31 @@ const Directory = (props) => {
 
   return (
     <Fragment>
-      <ListItemButton className="Directory-button" onClick={handleClick}>
+      <div className="Directory-button" onClick={handleClick}>
         {open && <ExpandLess />}
         {!open && <ExpandMore />}
-        <ListItemText primary={name} />
-      </ListItemButton>
-      {haveDetails && (
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" className="Directory-details">
-            {details?.entries?.map((dir, index) =>
-              dir.type === "directory" ? (
-                <Directory
-                  key={index}
-                  name={dir.name}
-                  enqueueSnackbar={props.enqueueSnackbar}
-                  path={path === "root" ? dir.name : path + "/" + dir.name}
-                />
-              ) : (
-                <File
-                  key={index}
-                  name={dir.name}
-                  enqueueSnackbar={props.enqueueSnackbar}
-                  path={path === "root" ? dir.name : path + "/" + dir.name}
-                />
-              )
-            )}
-          </List>
-        </Collapse>
+        <div>{name}</div>
+      </div>
+      {haveDetails && open && (
+        <div className="Directory-details">
+          {details?.entries?.map((dir, index) =>
+            dir.type === "directory" ? (
+              <Directory
+                key={index}
+                name={dir.name}
+                enqueueSnackbar={props.enqueueSnackbar}
+                path={path === "root" ? dir.name : path + "/" + dir.name}
+              />
+            ) : (
+              <File
+                key={index}
+                name={dir.name}
+                enqueueSnackbar={props.enqueueSnackbar}
+                path={path === "root" ? dir.name : path + "/" + dir.name}
+              />
+            )
+          )}
+        </div>
       )}
     </Fragment>
   );
