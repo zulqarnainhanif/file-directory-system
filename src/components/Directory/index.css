@@ -9,6 +9,10 @@
   padding-left: 10px !important;
 }
 
+.Directory-searchbar {
+  margin-left: 10px;
+}
+
 .Directory-button svg {
   width: 30px;
   height: 30px;
